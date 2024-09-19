@@ -1,0 +1,10 @@
+[19-Sep-2024 18:04:29 UTC] PHP Fatal error:  Uncaught TypeError: MyPlugin::__construct(): Argument #1 ($args) must be of type string, array given, called in C:\xampp\htdocs\--server--\learning\wp-content\plugins\my-plugin\my-plugin.php on line 45 and defined in C:\xampp\htdocs\--server--\learning\wp-content\plugins\my-plugin\my-plugin.php:38
+Stack trace:
+#0 C:\xampp\htdocs\--server--\learning\wp-content\plugins\my-plugin\my-plugin.php(45): MyPlugin->__construct(Array)
+#1 C:\xampp\htdocs\--server--\learning\wp-settings.php(522): include_once('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\--server--\learning\wp-config.php(98): require_once('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\--server--\learning\wp-load.php(50): require_once('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\--server--\learning\wp-admin\admin.php(34): require_once('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\--server--\learning\wp-admin\plugins.php(10): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+  thrown in C:\xampp\htdocs\--server--\learning\wp-content\plugins\my-plugin\my-plugin.php on line 38
