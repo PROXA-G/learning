@@ -37,58 +37,10 @@ if (file_exists(dirname(__FILE__) . './vendor/autoload.php')) {
     require_once dirname(__FILE__) . './vendor/autoload.php';
 }
 
-use Inc\Activate;
-use Inc\Admin\AdminPages;
-use Inc\Deactivate;
+define('PLUGIN_NAME', plugin_basename(__FILE__));
+define('PLUGIN_PATH', plugin_dir_path(__FILE__));
+define('PLUGIN_URL', plugin_dir_url(__FILE__));
 
-if (!class_exists('MyPlugin')) {
-    class MyPlugin
-    {
-        public $name;
-
-        public function __construct()
-        {
-            $this->name = plugin_basename(__FILE__);
-        }
-
-        public function register()
-        {
-            add_action('admin_enqueue_scripts', [ $this, 'enqueue' ]);
-            AdminPages::register($this->name);
-
-        }
-
-        protected function create_post_type()
-        {
-            add_action('init', [ $this, 'custom_post_type' ]);
-        }
-
-        public function activate()
-        {
-            Activate::activate();
-        }
-
-        public function deactivate()
-        {
-            Deactivate::deactivate();
-        }
-
-        public function custom_post_type()
-        {
-            register_post_type('book', [ 'public' => true, 'label' => 'Books' ]);
-        }
-
-        public function enqueue()
-        {
-            wp_enqueue_style('myStyles', plugins_url('/assets/css/myStyles.css', __FILE__));
-            wp_enqueue_script('myScript', plugins_url('/assets/js/myScript.js', __FILE__));
-        }
-    }
-
-    $myPlugin = new MyPlugin();
-    $myPlugin->register();
-
-    register_activation_hook(__FILE__, [ $myPlugin, 'activate' ]);
-    register_deactivation_hook(__FILE__, [ $myPlugin, 'deactivate' ]);
-
+if (class_exists('Inc\\Init')) {
+    Inc\Init::register_services();
 }
