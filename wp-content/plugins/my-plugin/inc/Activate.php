@@ -3,10 +3,12 @@
  * @package MyPlugin
  */
 
-class MyPluginDeactivate
+namespace Inc;
+
+class Activate
 {
 
-    public static function deactivate()
+    public static function activate()
     {
         flush_rewrite_rules();
     }

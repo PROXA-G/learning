@@ -32,6 +32,15 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 if (!defined('ABSPATH')) {
     die;
 }
+
+if (file_exists(dirname(__FILE__) . './vendor/autoload.php')) {
+    require_once dirname(__FILE__) . './vendor/autoload.php';
+}
+
+use Inc\Activate;
+use Inc\Admin\AdminPages;
+use Inc\Deactivate;
+
 if (!class_exists('MyPlugin')) {
     class MyPlugin
     {
@@ -45,30 +54,8 @@ if (!class_exists('MyPlugin')) {
         public function register()
         {
             add_action('admin_enqueue_scripts', [ $this, 'enqueue' ]);
+            AdminPages::register($this->name);
 
-            // This is a action for adding the Page in the Admin_Menu
-            add_action('admin_menu', [ $this, 'add_admin_pages' ]);
-
-            add_filter("plugin_action_links_$this->name", [ $this, 'settings_link' ]);
-        }
-
-        public function settings_link($links)
-        {
-            $settings_link = "<a href='admin.php?page=my_plugin_page'>Settings</a>";
-            array_push($links, $settings_link);
-            return $links;
-        }
-
-        public function add_admin_pages()
-        {
-            // We are adding the pages using this "add_menu_page" section
-            add_menu_page('My Plugin Page', 'MyPlugin', 'manage_options', 'my_plugin_page', [ $this, 'admin_page_template' ], 'dashicons-store', 110);
-        }
-
-        public function admin_page_template()
-        {
-            require_once plugin_dir_path(__FILE__) . 'templates/admin.php';
-            // Here we will require the PAGE from Templates
         }
 
         protected function create_post_type()
@@ -78,14 +65,12 @@ if (!class_exists('MyPlugin')) {
 
         public function activate()
         {
-            require_once plugin_dir_path(__FILE__) . 'inc/my-plugin-activate.php';
-            MyPluginActivate::activate();
+            Activate::activate();
         }
 
         public function deactivate()
         {
-            require_once plugin_dir_path(__FILE__) . 'inc/my-plugin-deactivate.php';
-            MyPluginDeactivate::deactivate();
+            Deactivate::deactivate();
         }
 
         public function custom_post_type()

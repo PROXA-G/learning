@@ -1,0 +1,19 @@
+{
+    "name": "prox/my-plugin",
+    "description": "Learning Plugin Development With Alecaddd",
+    "type": "project",
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "Inc\\": "./inc"
+        }
+    },
+    "authors": [
+        {
+            "name": "PROXA-G",
+            "email": "grandmasteroogway556@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
