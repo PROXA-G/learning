@@ -7,7 +7,7 @@ namespace Inc\Pages;
 
 class Admin
 {
-    public function register($name = PLUGIN_NAME)
+    public function register($name = PLUGIN)
     {
         // This is a action for adding the Page in the Admin_Menu
         add_action('admin_menu', [ $this, 'add_admin_pages' ]);
