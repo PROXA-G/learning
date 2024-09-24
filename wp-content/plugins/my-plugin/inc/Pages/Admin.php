@@ -5,22 +5,15 @@
 
 namespace Inc\Pages;
 
-class Admin
+use Inc\Base\BaseController;
+
+class Admin extends BaseController
 {
-    public function register($name = PLUGIN)
+    public function register()
     {
         // This is a action for adding the Page in the Admin_Menu
         add_action('admin_menu', [ $this, 'add_admin_pages' ]);
 
-        add_filter("plugin_action_links_$name", [ $this, 'settings_link' ]);
-
-    }
-
-    public function settings_link($links)
-    {
-        $settings_link = "<a href='admin.php?page=my_plugin_page'>Settings</a>";
-        array_push($links, $settings_link);
-        return $links;
     }
 
     public function add_admin_pages()
@@ -31,7 +24,7 @@ class Admin
 
     public function admin_index()
     {
-        require_once PLUGIN_PATH . 'templates\admin.php';
+        require_once $this->plugin_path . 'templates\admin.php';
     }
 
 }
